@@ -10,5 +10,19 @@ class Checkin {
             }
         });
     }
+    findByStatus(){
+        return checkinTable.findAll({
+            where:{
+                status:false,
+            }
+        });
+    }
+    update(id,data){
+        return checkinTable.update(data,{
+            where:{
+                id:id,
+            }
+        });
+    }
 }
 module.exports = Checkin;

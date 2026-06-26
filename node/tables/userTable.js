@@ -1,56 +1,71 @@
 const { sequelize } = require("../DataBaseConnection");
-const dataType = require("sequelize/lib/data-types");
+const {DataTypes}=require("sequelize");
 const userTable = sequelize.define(
   "user",
   {
     id: {
-      type: dataType.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     username: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     password: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createTime: {
-      type: dataType.DATE,
+      type: DataTypes.DATE,
       allowNull: true,
       defaultValue: sequelize.NOW,
     },
     status: {
-      type: dataType.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
     },
     avatar: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: "",
     },
     checkScores: {
-      type: dataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: 0,
     },
     nickname: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: "普通用户",
     },
     email: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: "",
     },
     phone: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: "",
+    },
+    signature: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      defaultValue: "",
+    },
+    level: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 1,
+    },
+    role: {
+      type: DataTypes.ENUM("admin", "user"),
+      allowNull: false,
+      defaultValue: "user",
     },
   },
   {

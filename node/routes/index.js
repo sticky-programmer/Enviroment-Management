@@ -5,8 +5,15 @@ const garbageRouter = require("./garbage.js");
 const checkinRouter = require("./checkin.js");
 const activityRouter = require("./activity.js");
 const user_activityRouter = require("./user_activity.js");
+const ai_recognitionRouter = require("./ai_recognition.js");
+const securityRouter = require("./security.js");
+const notificationRouter = require("./notification.js");
+const user_notificationRouter = require("./user_notification.js");
+const adminRouter = require("./Admin/admin.js");
+const messageRouter = require("../routes/Message/message.js");
+const authenticateToken = require("../auth/auth.js");
+
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "123456";
 router.get("/", (req, res) => {
   res.send("hello world");
 });
@@ -15,18 +22,12 @@ router.use("/garbage", authenticateToken, garbageRouter);
 router.use("/checkin", authenticateToken, checkinRouter);
 router.use("/activity", authenticateToken, activityRouter);
 router.use("/user_activity", authenticateToken, user_activityRouter);
-function authenticateToken(req, res, next) {
-  const token = req.headers["authorization"];
-  if (!token) {
-    return res.status(401).json({ message: "不存在token" });
-  } else {
-    try {
-      const decoded = jwt.verify(token.split(" ")[1], SECRET_KEY);
-      req.user = decoded;
-      next();
-    } catch (err) {
-      return res.status(401).json({ message: "token无效" });
-    }
-  }
-}
+router.use("/ai_recognition", authenticateToken, ai_recognitionRouter);
+router.use("/notification", authenticateToken, notificationRouter);
+router.use("/user_notification", authenticateToken, user_notificationRouter);
+router.use("/security", securityRouter);
+router.use("/admin", adminRouter);
+router.use("/message", authenticateToken, messageRouter);
+
+
 module.exports = router;

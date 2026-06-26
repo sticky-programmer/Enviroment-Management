@@ -18,5 +18,8 @@ class Activity {
   findByPk(id) {
     return activityTable.findByPk(id);
   }
+  delete(id) {
+    return activityTable.destroy({ where: { id } });
+  }
 }
 module.exports = Activity;

@@ -1,49 +1,63 @@
-const { sequelize } = require("../DataBaseConnection.js");
-const dataType = require("sequelize/lib/data-types");
+const { sequelize } = require("../DataBaseConnection");
+const { DataTypes } = require("sequelize");
+
 const activityTable = sequelize.define(
   "activity",
   {
     id: {
-      type: dataType.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
+
     title: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
+
     beginTime: {
-      type: dataType.STRING,
+      type: DataTypes.DATE,
       allowNull: false,
     },
+
     endTime: {
-      type: dataType.STRING,
+      type: DataTypes.DATE,
       allowNull: false,
     },
+
     address: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
+
     image: {
-      type: dataType.STRING,
-      allowNull: true,
+      type: DataTypes.STRING,
       defaultValue: "",
     },
+
     maxNum: {
-      type: dataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
+
     organizer: {
-      type: dataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
+
     contact: {
-      type: dataType.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
+
     description: {
-      type: dataType.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
+    },
+
+    scores: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
   },
   {
@@ -51,4 +65,5 @@ const activityTable = sequelize.define(
     timestamps: false,
   },
 );
+
 module.exports = activityTable;

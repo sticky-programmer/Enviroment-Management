@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
-const dataType = require("sequelize/lib/data-types");
-const sequelize = new Sequelize("environment_protection", "Wu", "123456", {
-  host: "8.137.192.209",
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  logging: false,
   dialect: "mysql",
-  timezone: "+08:00",
 });
 module.exports = { sequelize };
